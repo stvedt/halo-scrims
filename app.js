@@ -60,5 +60,20 @@ app.use(function(err, req, res, next) {
   });
 });
 
+// Halo API
+
+var API_KEY = require('./keys/halo5');
+var HaloAPI = require('haloapi');
+var h5 = new HaloAPI(API_KEY);
+
+// h5.metadata.weapons().then(function (weapons) {
+//     weapons.forEach(function (weapon) {
+//         console.log(weapon.name, '\n\t', weapon.description);
+//     });
+// });
+
+h5.profile.emblemImage("Norwegian Sven").then(function (url) {
+    console.log(url);
+});
 
 module.exports = app;
