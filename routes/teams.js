@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/teams/', function(req, res){
-    var name = req.params.name;
+router.get('/', function(req, res, next){
 
     res.render('default', {
         pageTitle: 'Teams ',
@@ -10,7 +9,7 @@ router.get('/teams/', function(req, res){
     });
 });
 
-router.get('/teams/:teamName?',  function(req, res){
+router.get('/:teamName?',  function(req, res, next){
     var name = req.params.name;
 
     res.render('default', {
