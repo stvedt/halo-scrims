@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -72,8 +73,28 @@ var h5 = new HaloAPI(API_KEY);
 //     });
 // });
 
-h5.profile.emblemImage("Norwegian Sven").then(function (url) {
-    console.log(url);
-});
+h5.stats.playerMatches({
+    player: "Norwegian Sven",
+    mode: "arena",
+    start: 0 ,
+    count: 5
+  }).then(function (data) {
+      // success, iterate through your matches
+      console.log(data);
+      fs.writeFile('./sven-matches.json', JSON.stringify(data));
+  })
+  .catch(function (error) {
+      // uh oh, handle error here.
+  });
+
+
+  h5.stats.arenaMatchById("1ad1cdec-a86a-4e2c-94d5-cab180b55eea")
+    .then(function (match) {
+        console.log(match.TeamStats);
+        fs.writeFile('./team-stats.json', JSON.stringify(match));
+    });
+// h5.profile.emblemImage("Norwegian Sven").then(function (url) {
+//     console.log(url);
+// });
 
 module.exports = app;
