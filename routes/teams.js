@@ -4,7 +4,7 @@ var router = express.Router();
 var dataEnvyUs = {
   name: "EnVyUs",
   players: ['Mikwen','APG','Heinz','Pistola']
-}
+};
 
 
 var TeamSchema = require('../schemas/teams');
@@ -52,7 +52,7 @@ router.get('/:teamName?',  function(req, res, next){
     res.render('default', {
         pageTitle: 'Team: ' + req.params.teamName,
         className: 'team-single',
-        players: 
+        players: null
     });
 });
 
